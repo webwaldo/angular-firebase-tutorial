@@ -6,11 +6,16 @@ angular.module('firebaseApp')
 
     var rootRef = new Firebase('https://brookyy.firebaseio.com/');
     var messagesRef = rootRef.child('messages');
+    var titleRef = rootRef.child('title');
 
+    $scope.title = null;
     $scope.currentUser = null;
     $scope.currentText = null;
     $scope.messages = [];
 
+    titleRef.once('value', function(snapshot){
+      $scope.title = snapshot.val();
+    });
 
     messagesRef.on('child_added', function(snapshot) {
       $timeout( function() {
@@ -71,6 +76,10 @@ angular.module('firebaseApp')
       };
 
       messagesRef.push(newMessage);
+    };
+
+    $scope.turnFeedOff = function(){
+      messagesRef.off();
     };
 
   });
