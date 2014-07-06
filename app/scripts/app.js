@@ -15,5 +15,5 @@ angular.module('firebaseApp', [
       .otherwise({
         redirectTo: '/'
       });
-  });
-
+  })
+  .constant('FBURL', 'https://brookyy.firebaseio.com/');
