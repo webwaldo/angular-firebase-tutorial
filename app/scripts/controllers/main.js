@@ -9,17 +9,59 @@ angular.module('firebaseApp')
 
     $scope.currentUser = null;
     $scope.currentText = null;
+    $scope.messages = [];
 
 
-
-    messagesRef.on('value', function(snapshot) {
+    messagesRef.on('child_added', function(snapshot) {
       $timeout( function() {
         console.log(messagesRef);
         var snapshotVal = snapshot.val();
         console.log(snapshotVal);
-        $scope.messages = snapshotVal;
+        $scope.messages.push({
+          text: snapshotVal.text,
+          user: snapshotVal.user,
+          name: snapshot.name()
+        });
       });
     });
+
+    messagesRef.on('child_changed', function(snapshot) {
+      $timeout( function() {
+        console.log(messagesRef);
+        var snapshotVal = snapshot.val();
+        var message = findMessageByName(snapshot.name() );
+        message.text = snapshotVal.text;
+        message.user = snapshotVal.user;
+      });
+    });
+
+    messagesRef.on('child_removed', function(snapshot) {
+      $timeout( function() {
+        deleteMessageByName(snapshot.name() );
+      });
+    });
+
+    function deleteMessageByName(name){
+      for(var i=0; i < $scope.messages.length; i++ ){
+        var currentMessage = $scope.messages[i];
+        if( currentMessage.name === name){
+          $scope.messages.splice(i,1);
+          break;
+        }
+      }
+    }
+
+    function findMessageByName(name){
+      var messageFound = null;
+      for(var i=0; i < $scope.messages.length; i++ ){
+        var currentMessage = $scope.messages[i];
+        if( currentMessage.name === name){
+          messageFound = currentMessage;
+          break;
+        }
+      }
+      return messageFound;
+    }
 
     $scope.sendMessage = function(){
       console.log('send dat message');
