@@ -8,11 +8,8 @@ angular.module('firebaseApp')
     $scope.messages = [];
 
 
-    MessageService.childAdded(10, function(addedChild){
-      console.log('added child', addedChild);
-      $timeout( function() {
+    MessageService.childAdded(function(addedChild){
         $scope.messages.push(addedChild);
-      });
     });
 
 
@@ -22,7 +19,10 @@ angular.module('firebaseApp')
         user: $scope.currentUser,
         text: $scope.currentText
       };
-      MessageService.add(newMessage);
+      var promise = MessageService.add(newMessage);
+      promise.then( function(data){
+        console.log(data.name());
+      });
     };
 
     $scope.turnFeedOff = function(){

@@ -17,4 +17,5 @@ angular.module('firebaseApp', [
         redirectTo: '/'
       });
   })
-  .constant('FBURL', 'https://brookyy.firebaseio.com/');
+  .constant('FBURL', 'https://brookyy.firebaseio.com/')
+  .constant('MSGURL', 'https://brookyy.firebaseio.com/messages');
