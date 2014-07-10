@@ -5,7 +5,9 @@ angular.module('firebaseApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'firebase'
+  'firebase',
+  'routeSecurity',
+  'simpleLoginTools'
 ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -15,7 +17,8 @@ angular.module('firebaseApp', [
       })
       .when('/chat',{
         templateUrl: 'views/chat.html',
-        controller: 'ChatCtrl'
+        controller: 'ChatCtrl',
+        authReqquired: true
       })
       .when('/login',{
         templateUrl: 'views/login.html',
@@ -34,4 +37,5 @@ angular.module('firebaseApp', [
       });
   })
   .constant('FBURL', 'https://brookyy.firebaseio.com/')
-  .constant('MSGURL', 'https://brookyy.firebaseio.com/messages');
+  .constant('MSGURL', 'https://brookyy.firebaseio.com/messages')
+  .constant('loginRedirectPath','/login');
