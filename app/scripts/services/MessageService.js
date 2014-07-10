@@ -8,11 +8,11 @@
 			childAdded: function childAdded(cb){ // can be named, helps with debugging
 				fireMessage.$on('child_added', function(data){
 					var val = data.snapshot.value;
-					console.log(data);
+					console.log(data, 'val', val);
 					cb.call(this, {
-						user: val.user,
 						text: val.text,
-						name: data.snapshot.name
+						name: data.snapshot.name,
+						email: val.email
 					});
 				});
 			},

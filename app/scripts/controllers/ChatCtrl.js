@@ -13,11 +13,16 @@
 
 
 		  $scope.sendMessage = function(){
-		    console.log('send dat message');
+		   
 		    var newMessage = {
 		      user: $scope.currentUser,
-		      text: $scope.currentText
+		      text: $scope.currentText,
+		      email: $scope.user.email,
+		      uid: $scope.user.uid
 		    };
+
+		    console.log('send dat message', newMessage);
+
 		    var promise = MessageService.add(newMessage);
 		    promise.then( function(data){
 		      console.log(data.name());

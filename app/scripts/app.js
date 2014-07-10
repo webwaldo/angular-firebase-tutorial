@@ -25,6 +25,10 @@ angular.module('firebaseApp', [
         templateUrl: 'views/register.html',
         controller: 'RegisterCtrl'
       })
+      .when('/logout',{
+        template: 'Logging Out...',
+        controller: 'LogoutCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

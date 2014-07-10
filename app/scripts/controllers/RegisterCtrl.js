@@ -1,6 +1,6 @@
 (function (angular) {
 	angular.module('firebaseApp')
-	.controller('RegisterCtrl', function ($scope, $firebaseSimpleLogin, FBURL, $window) {
+	.controller('RegisterCtrl', function ($scope, $firebaseSimpleLogin, FBURL, $window, $rootScope) {
 		var fbRef = new Firebase(FBURL);
 		$scope.erors = [];
 		$scope.simpleLogin = $firebaseSimpleLogin(fbRef);
@@ -30,7 +30,7 @@
 			var promise = $scope.simpleLogin.$createUser(user.email, user.password);
 
 			promise.then( function(user) {
-
+				$rootScope.user = user; // adds user to the parent most scope, so all child scopes have access!
 				console.log(user);
 				$window.location.href = '/#/home';
 			}, function(error) {

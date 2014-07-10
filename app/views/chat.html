@@ -3,7 +3,7 @@
 
 <div class="jumbotron">
   <div ng-repeat="message in messages">
-    {{ message.user  }} - {{ message.text }}
+    {{ message.email  }} - {{ message.text }}
   </div>
 </div>
 
@@ -14,7 +14,6 @@
 <button type="button" class="btn btn-danger" ng-click="turnFeedOff()">Turn feed off</button>
 
 <div class="row marketing">
-  <input placeholder="name" type="text" class="form-control" ng-model="currentUser" >
   <div class="input-group">
     <input type="text" placeholder="msg" class="form-control" ng-model="currentText" />
     <span class="input-group-btn">
